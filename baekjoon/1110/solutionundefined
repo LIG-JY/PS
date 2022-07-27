@@ -1,0 +1,20 @@
+// [문제 링크]: https://www.acmicpc.net/problem/1110
+
+def solution(x):
+    charm = x
+    num = str(x)
+    back = False
+    count = 0
+    while not back:
+        if len(num) < 2:
+            num = '0' + num
+        new = num[-1]+str(int(num[0]) + int(num[-1]))[-1]
+        count = count + 1
+        if charm == int(new):
+            back = True
+        else:
+            num = new
+    return count
+​
+N = int(input())
+print(str(solution(N)))
