@@ -1,0 +1,33 @@
+// [문제 링크]: https://www.acmicpc.net/problem/17609
+
+def ispalindrome(word, left, right):
+    while left < right:
+        if word[left] == word[right]:
+            left += 1
+            right -= 1
+        else:
+            return False
+    return True
+​
+​
+def solution(word, left, right):
+    while left < right:
+        if word[left] == word[right]:
+            left += 1
+            right -= 1
+        else:
+            case_1 = ispalindrome(word,left+1,right)
+            case_2 = ispalindrome(word,left,right-1)
+            if case_1 or case_2:
+                return 1
+            else:
+                return 2
+    return 0
+​
+n = int(input())
+for _ in range(n):
+    x = input()
+    left = 0
+    right = len(x) -1
+    answer = solution(x,left,right)
+    print(answer)
