@@ -1,3 +1,6 @@
+
+# 문제링크: https://www.hackerrank.com/challenges/print-the-elements-of-a-linked-list-in-reverse/problem?isFullScreen=true
+
 def reversePrint(llist):
     if llist == None:
         return None
