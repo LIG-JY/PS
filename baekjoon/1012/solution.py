@@ -2,40 +2,38 @@
 
 from collections import deque
 ​
-dx = [0,0,1,-1]
-dy = [1,-1,0,0]
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
 ​
-t = int(input())
 ​
-def bfs(graph, a, b):
-    queue = deque()
-    queue.append((a,b))
-    graph[a][b] = 0
-​
-    while queue:
-        x, y = queue.popleft()
-        for i in range(4):
-            nx = x+dx[i]
-            ny = y+dy[i]
-            if nx < 0 or nx >=n or ny < 0 or ny >= m:
+def bfs(x, y, map):
+    queue_ = deque()
+    queue_.append((x, y))
+    map[x][y] = 0
+    while queue_:
+        current_x, current_y = queue_.popleft()
+        for idx in range(4):
+            if current_x + dx[idx] < 0 or current_x + dx[idx] >= N or \
+                    current_y + dy[idx] < 0 or current_y + dy[idx] >= M:
                 continue
-            if graph[nx][ny] == 1:
-                graph[nx][ny] = 0
-                queue.append((nx, ny))
+            if map[current_x + dx[idx]][current_y + dy[idx]] == 1:
+                map[current_x + dx[idx]][current_y + dy[idx]] = 0
+                queue_.append((current_x + dx[idx], current_y + dy[idx]))
     return
 ​
-for i in range(t):
-    cnt = 0
-    n, m, k = map(int,input().split())
-    graph = [[0 for _ in range(m)] for _ in range(n)]
 ​
-    for j in range(k):
+​
+test = int(input())
+for cases in range(test):
+    M, N, K = map(int, input().split())
+    current_map = [[0] * M for _ in range(N)]
+    for _ in range(K):
         x, y = map(int, input().split())
-        graph[x][y] = 1
-​
-    for a in range(n):
-        for b in range(m):
-            if graph[a][b] == 1:
-                bfs(graph, a, b)
-                cnt += 1
-    print(cnt)
+        current_map[y][x] = 1
+    count = 0
+    for y in range(N):
+        for x in range(M):
+            if current_map[y][x] == 1:
+                bfs(y, x, current_map)
+                count += 1
+    print(count)
