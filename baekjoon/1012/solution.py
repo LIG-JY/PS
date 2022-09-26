@@ -8,11 +8,10 @@ dy = [0, 0, 1, -1]
 ​
 def bfs(x, y, map):
     queue_ = deque()
-    queue_.append((x, y))
     map[x][y] = 0
+    queue_.append((x, y))
     while queue_:
         current_x, current_y = queue_.popleft()
-        
         for idx in range(4):
             if current_x + dx[idx] < 0 or current_x + dx[idx] >= N or \
                     current_y + dy[idx] < 0 or current_y + dy[idx] >= M:
