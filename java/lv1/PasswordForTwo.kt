@@ -7,7 +7,3 @@ class PasswordForTwo {
             .joinToString("")
     }
 }
-
-fun main() {
-    println(PasswordForTwo().solution("aukks", "wbqd", 5))
-}
