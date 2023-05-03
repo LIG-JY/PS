@@ -16,4 +16,4 @@ class SplitString {
 
         return 1
     }
-}
+}   
