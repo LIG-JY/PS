@@ -43,5 +43,5 @@ fun a() {
 }
 
 fun main() {
-    a()
+    println("Hello")
 }
