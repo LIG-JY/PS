@@ -1,6 +1,6 @@
 import java.io.*
 
-class Boj2309 {
+class Boj2309_a {
 
 }
 
@@ -43,5 +43,5 @@ fun a() {
 }
 
 fun main() {
-    println("Hello")
+    a()
 }
