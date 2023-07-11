@@ -11,23 +11,9 @@ int makeSecond(string input) {
 }
 
 void printT(int seconds) {
-    string m = "";
-    string s = "";
-    int mv = seconds / 60;
-    int ms = seconds % 60;
-    if (mv < 10) {
-        m = "0" + to_string(mv);
-    }
-    else {
-        m = to_string(mv);
-    }
-    if (ms < 10) {
-        s = "0" + to_string(ms);
-    }
-    else {
-        s = to_string(ms);
-    }
-    cout << m << ":" << s << "\n";
+    string m = "0" + to_string(seconds / 60);
+    string s = "0" + to_string(seconds % 60);
+    cout << m.substr(m.size() - 2, 2) << ":" << s.substr(s.size() - 2, 2) << "\n";
 }
 
 int main() {
