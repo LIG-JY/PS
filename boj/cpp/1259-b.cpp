@@ -1,28 +1,21 @@
 #include <iostream>
 using namespace std;
 
-int arr[5], input, num;
-void go(int *arr, int size);
+bool isPalindrome(int num);
+
 int main()
 {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
 	cout.tie(nullptr);
 
+	int input;
 	do
 	{
 		cin >> input;
-		num = input;
-		int size = 0;
-		for (int i = 0; i < 5 && num > 0; i++)
+		if (input)
 		{
-			arr[i] = (num % 10);
-			num /= 10;
-			size++;
-		}
-		if (size)
-		{
-			go(arr, size);
+			cout << (isPalindrome(input) ? "yes" : "no") << "\n";
 		}
 
 	} while (input);
@@ -30,22 +23,19 @@ int main()
 	return 0;
 }
 
-void go(int *arr, int size)
+bool isPalindrome(int num)
 {
-	int i = 0;
-	int j = size - 1;
+	string s = to_string(num);
+	int i = 0, j = s.length() - 1;
 	while (i < j)
 	{
-		if (arr[i] != arr[j])
+		if (s[i] != s[j])
 		{
-			cout << "no"
-				 << "\n";
-			return;
+			return false;
 		}
 		i++;
 		j--;
 	}
-	cout << "yes"
-		 << "\n";
-	return;
+	return true;
 }
+
