@@ -16,7 +16,7 @@ int main()
         _list.push_back(i);
     }
 
-    int last;
+    int last = -1;
     while (!_list.empty())
     {
         // 젤 위 카드 버리기
@@ -24,8 +24,11 @@ int main()
         _list.pop_front();
 
         // 젤 위 카드 아래로 옮기기
-        _list.push_back(_list.front());
-        _list.pop_front();
+        if (!_list.empty())
+        {
+            _list.push_back(_list.front());
+            _list.pop_front();
+        }
     }
     cout << last;
 }
