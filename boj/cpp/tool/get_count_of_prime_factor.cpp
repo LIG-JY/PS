@@ -1,4 +1,4 @@
-#include "get_count_of_prime_factor.h"
+#include "get_count_of_prime_factor.hpp"
 
 // get count of prime factor
 int get_count_of_prime_factor(int n, const int prime_factor)
