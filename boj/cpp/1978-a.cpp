@@ -1,8 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n;
-deque<int> _list;
+bool isPrime(int num)
+{
+    std::vector<char> erato;
+    for (int i = 0; i <= num; i++)
+    {
+        erato.push_back(1);
+    }
+
+    erato[0] = 0;
+    erato[1] = 0;
+
+    for (int i = 2; i * i <= num; i++)
+    {
+        if (erato[i])
+        {
+            for (int j = i * i; j <= num; j += i)
+            {
+                erato[j] = 0;
+            }
+        }
+    }
+
+    return erato[num];
+}
+
+int n, _input, answer;
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -10,22 +34,13 @@ int main()
     cout.tie(nullptr);
 
     cin >> n;
-
-    for (int i = 1; i <= n; i++)
+    for (int i = 0; i < n; i++)
     {
-        _list.push_back(i);
+        cin >> _input;
+        if (isPrime(_input))
+        {
+            answer++;
+        }
     }
-
-    int last;
-    while (!_list.empty())
-    {
-        // 젤 위 카드 버리기
-        last = _list.front();
-        _list.pop_front();
-
-        // 젤 위 카드 아래로 옮기기
-        _list.push_back(_list.front());
-        _list.pop_front();
-    }
-    cout << last;
+    cout << answer;
 }
