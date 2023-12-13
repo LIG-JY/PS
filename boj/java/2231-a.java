@@ -1,27 +1,47 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Solution {
+public class Main {
 
-    public int[] solution(int[] arr, int[][] queries) {
-        List<Integer> res = new ArrayList<>();
-        for (var query : queries) {
-            res.add(runQuery(arr ,query));
-        }
-        return res.stream().mapToInt(Integer::intValue).toArray();
-    }
+    public void bojSolution() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        // 입력
+        int n = Integer.parseInt(br.readLine());
+        br.close();
 
-    private int runQuery(int[] arr, int[] query) {
-        List<Integer> resultSet = new ArrayList<>();
-        for (int i = query[0]; i <= query[1] ; i++) {
-            if (arr[i] > query[2]) {
-                resultSet.add(arr[i]);
+        // 분해합 생성자를 저장하는 컨테이너
+        List<Integer> container = new ArrayList<>();
+
+        for (int i = n; i > 0; i--) {
+            int res = i;
+            int div = res;
+            while (div > 0) {
+                res += (div % 10);
+                div /= 10;
+            }
+            if (res == n) {
+                container.add(i);
             }
         }
-        if (!resultSet.isEmpty()) {
-            return Collections.min(resultSet);
+
+        // 최소값 찾기
+        int answer = 0;
+        if (!container.isEmpty()) {
+            answer = Collections.min(container);
         }
-        return -1;
+
+        // 출력
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        bw.write(String.valueOf(answer));
+        bw.flush();
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().bojSolution();
     }
 }
