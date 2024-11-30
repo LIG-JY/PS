@@ -6,54 +6,57 @@ import java.io.OutputStreamWriter
 fun main(args: Array<String>) {
     BufferedReader(InputStreamReader(System.`in`)).use { reader ->
         BufferedWriter(OutputStreamWriter(System.out)).use { writer ->
-            val input = reader.readLine()
-
-            val dq = ArrayDeque<Pair<Int, Char>>(input.length)
-            val laserLocation = mutableSetOf<Int>()
             val intervals = mutableSetOf<Pair<Int, Int>>()
-            input.forEachIndexed { index, char ->
-                when (char) {
+            val laserLocations = mutableSetOf<Int>()
+            val dq = ArrayDeque<Pair<Int, Char>>()
+            reader.readLine().forEachIndexed { index, c ->
+                when (c) {
                     '(' -> {
-                        dq.addLast(Pair(index, char))
+                        dq.addLast(index to c)
                     }
 
                     ')' -> {
-                        if (dq.last().first + 1 == index) {
-                            laserLocation.add(index)
+                        if (dq.last().first + 1 == index) { // laser
+                            laserLocations.add(index)
+                            dq.removeLast()
                         } else {
-                            intervals.add(Pair(dq.last().first, index)) //
+                            intervals.add(dq.last().first to index)
+                            dq.removeLast()
                         }
-                        dq.removeLast()
                     }
                 }
             }
-            // coordinate compression
-            val allCoordinates = intervals.flatMap { p ->
-                listOf(p.first, p.second)
+            val allCoordinate = intervals.flatMap { p ->
+                p.toList()
             }.toMutableSet()
-            allCoordinates.addAll(laserLocation)
-            val coordinateMap = allCoordinates.sorted().withIndex().associate { it.value to it.index + 1 }
-            val compressedLaserLocation = laserLocation.map { coordinateMap.getValue(it) }
+            allCoordinate.addAll(laserLocations)
+            // coordinate compression
+            val compressionMap = mutableMapOf<Int, Int>()
+            allCoordinate.sorted().forEachIndexed { index, c ->
+                compressionMap[c] = index + 1
+            }
             // prefix sum
-            val prefixSum = IntArray(coordinateMap.size + 1)
-            compressedLaserLocation.forEach {
-                prefixSum[it] = 1
+            val prefixSum = IntArray(compressionMap.size + 1)
+            laserLocations.sorted().forEach {
+                prefixSum[compressionMap[it]!!] = 1
             }
             for (i in 1 until prefixSum.size) {
                 prefixSum[i] += prefixSum[i - 1]
             }
-            var result = 0
-            intervals.forEach { p ->
-                val start = coordinateMap[p.first]!! - 1
-                val end = coordinateMap[p.second]!!
-                result += prefixSum[end] - prefixSum[start] + 1
+            // calculate result
+            var res = 0
+            // 구간에 속하는 레이저 개수 누적합
+            intervals.forEach { interval ->
+                res += (prefixSum[compressionMap[interval.second]!!] - prefixSum[compressionMap[interval.first]!! - 1])
             }
-            writer.writeLine(result.toString())
+            // 끝 막대 추가로 더하기
+            res += intervals.size
+            writer.writeLine(res)
         }
     }
 }
 
-private fun BufferedWriter.writeLine(str: String) {
-    write(str)
+private fun BufferedWriter.writeLine(value: Int) {
+    this.write(value.toString())
     this.newLine()
 }
