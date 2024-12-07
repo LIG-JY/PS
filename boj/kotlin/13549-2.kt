@@ -5,7 +5,7 @@ import java.io.BufferedWriter
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 
-class S13549 {
+class S13549_2 {
     companion object {
         const val MAX_RANGE = 100000
         const val MIN_RANGE = 0
@@ -20,12 +20,6 @@ class S13549 {
         BufferedReader(InputStreamReader(System.`in`)).use { reader ->
             BufferedWriter(OutputStreamWriter(System.out)).use { writer ->
                 val (n, k) = reader.readLine().split(" ").map { it.toInt() }
-
-                if (n == k) {
-                    writer.writeLine(0)
-                    return
-                }
-
                 val visited = BooleanArray(MAX_RANGE + 1) { false }
                 val dq = ArrayDeque<Struct>()
 
