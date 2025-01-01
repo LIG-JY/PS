@@ -11,13 +11,13 @@ class Solution {
             BufferedWriter(OutputStreamWriter(System.out)).use { writer ->
                 val (a, b, c) = reader.readLine().split(" ").map { it.toLong() }
 
-                fun solveRecursive(a: Long, b: Long, m: Long): Long {
-                    if (b == 0L) return 1L  // a^0 = 1
-                    if (b == 1L) return (a % m)  // a^1 = a % m
+                fun solveRecursive(num: Long, expo: Long, divisor: Long): Long {
+                    if (expo == 0L) return 1L  // a^0 = 1
+                    if (expo == 1L) return (num % divisor)  // a^1 = a % m
 
-                    val half = solveRecursive(a, b / 2, m)
+                    val half = solveRecursive(num, expo / 2, divisor)
 
-                    return (half * half % m) * solveRecursive(a, b % 2, m) % m
+                    return (((half * half) % divisor) * solveRecursive(num, expo % 2, divisor)) % divisor
                 }
 
                 writer.writeLine(solveRecursive(a, b, c))
