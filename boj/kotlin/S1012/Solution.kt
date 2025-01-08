@@ -1,11 +1,11 @@
-package kotlin
+package kotlin.S1012
 
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 
-class S1012 {
+class Solution {
     companion object {
         data class Point(val y: Int, val x: Int)
 

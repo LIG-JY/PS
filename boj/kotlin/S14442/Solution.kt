@@ -1,11 +1,11 @@
-package kotlin
+package kotlin.S14442
 
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 
-class S14442 {
+class Solution {
     companion object {
         const val UNVISITED = -1
         const val WALL = 1

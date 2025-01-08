@@ -1,11 +1,11 @@
-package kotlin
+package kotlin.S10093
 
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 
-class S10093 {
+class Solution {
     fun main() {
         BufferedReader(InputStreamReader(System.`in`)).use { reader ->
             BufferedWriter(OutputStreamWriter(System.out)).use { writer ->

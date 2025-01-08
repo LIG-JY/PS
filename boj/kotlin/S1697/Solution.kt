@@ -1,12 +1,11 @@
-package kotlin
+package kotlin.S1697
 
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 
-class S1697 {
-
+class Solution {
     companion object {
         data class Struct(val l: Int, val t: Int)
 

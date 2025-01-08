@@ -1,11 +1,11 @@
-package kotlin
+package kotlin.S13549
 
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 
-class S13549_1 {
+class Solution1 {
     companion object {
         const val MAX_RANGE = 200000
         const val MIN_RANGE = 0
