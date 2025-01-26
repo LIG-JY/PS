@@ -11,41 +11,42 @@ class Solution {
             BufferedWriter(OutputStreamWriter(System.out)).use { writer ->
                 val n = reader.readLine().toInt()
 
-                val grid = Array(n) { IntArray(n) { 0 } }   // DEBUG
+                fun nQueen(n: Int): Int {
+                    var count = 0
 
-                val colVisited = BooleanArray(n) { false }
-                val upRightDiagonalVisited = BooleanArray(2 * n) { false }
-                val downRightDiagonalVisited = BooleanArray(2 * n) { false }
+                    val rightVisited = BooleanArray(n) { false }
+                    val upRightVisited = BooleanArray(2 * n) { false }
+                    val downRightVisited = BooleanArray(2 * n) { false }
 
-                var res = 0
+                    fun findNQueenRecursive(y: Int) {
+                        if (y == n) {
+                            ++count
+                            return
+                        }
 
-                fun placeQueenRecursive(row: Int) {
-                    if (row == n) {
-                        ++res
-                        return
+                        for (x in 0 until n) {
+                            if (rightVisited[x]) continue
+                            if (upRightVisited[y + x]) continue
+                            if (downRightVisited[n + y - x]) continue
+
+                            rightVisited[x] = true
+                            upRightVisited[y + x] = true
+                            downRightVisited[n + y - x] = true
+
+                            findNQueenRecursive(y + 1)
+
+                            rightVisited[x] = false
+                            upRightVisited[y + x] = false
+                            downRightVisited[n + y - x] = false
+                        }
                     }
 
-                    for (x in 0 until n) {
-                        if (colVisited[x]) continue
-                        if (upRightDiagonalVisited[row + x]) continue
-                        if (downRightDiagonalVisited[x - row + n]) continue
+                    findNQueenRecursive(0)
 
-                        colVisited[x] = true
-                        upRightDiagonalVisited[row + x] = true
-                        downRightDiagonalVisited[x - row + n] = true
-                        grid[row][x] = 1  // DEBUG
-
-                        placeQueenRecursive(row + 1)
-
-                        colVisited[x] = false
-                        upRightDiagonalVisited[row + x] = false
-                        downRightDiagonalVisited[x - row + n] = false
-                        grid[row][x] = 0  // DEBUG
-                    }
+                    return count
                 }
 
-                placeQueenRecursive(0)
-                writer.writeLine(res)
+                writer.writeLine(nQueen(n))
             }
         }
     }
